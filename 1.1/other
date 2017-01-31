@@ -1,0 +1,43 @@
+class Bot {
+  int x;
+  int y;
+
+  int px;
+  int py;
+
+  Bot() {
+    x = width/2;
+    y = height/2;
+
+    px = x;
+    py = y;
+  }
+
+  void display() {
+    stroke(0);
+
+    image(picture,px, py);
+
+    px = x;
+    py = y;
+  }
+
+  void step() {
+
+    int choice = int(random(4));
+
+    if (choice == 0) {
+      x += 40;
+      delay(200);
+    } else if (choice == 1) {
+      x -= 40;
+      delay(200);
+    } else if (choice == 2) {
+      y += 40;
+      delay(200);
+    } else {
+      y -= 40;
+      delay(200);
+    }
+  }
+}
