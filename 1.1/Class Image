@@ -1,10 +1,10 @@
-class Bot {
+class Image {
   int x;
   int y;
   int px;
   int py;
 
-  Bot() {
+  Image() {
     x = width/2;
     y = height/2;
     px = x;
