@@ -1,10 +1,10 @@
-class Bot {
+class Arc {
   float x;
   float y;
   float px;
   float py;
 
-  Bot() {
+  Arc() {
     x = width/2;
     y = height/2;
     px = x;
