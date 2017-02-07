@@ -1,9 +1,9 @@
-Bot user;
+Arc user;
 
 void setup() {
   size(400,400);
   background(255);
-  user = new Bot();
+  user = new Arc();
 }
 
 void draw() {
