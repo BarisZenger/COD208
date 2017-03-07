@@ -2,6 +2,7 @@ float mag = 200;
 float k = 5;
 float move = 150;
 float dots = 360;
+float turn = 10;
 float rn = 40;
 float rn2 = 1;
 float pi = TWO_PI;
@@ -26,6 +27,7 @@ void setup() {
   cp5.addSlider("rn").setPosition(20, 80).setRange(1, 100);
   cp5.addSlider("rn2").setPosition(20, 100).setRange(1, 100);
   cp5.addSlider("pi").setPosition(20, 120).setRange(0, 200);
+  cp5.addSlider("turn").setPosition(20, 140).setRange(-200, 200);
 }
 
 void draw() {
@@ -33,11 +35,11 @@ void draw() {
   
   aniFacAng = sin(millis()* 0.001) * move;
   c = aniFacAng;
-  if(c>10){
+  if(c>turn){
   n = int (random(rn, rn + 10));
   d = int (random(rn2, rn2 +10));
   }
-  if(c<10){
+  if(c<turn){
   n = int (random(rn2, rn2 +10));
   d = int (random(rn, rn + 10));
   }
