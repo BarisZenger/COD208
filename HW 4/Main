@@ -1,11 +1,12 @@
 float mag = 200;
 float k = 5;
-float theta;
-float aniFacAng;
 float move = 150;
 float dots = 360;
 float rn = 40;
 float rn2 = 1;
+float pi = TWO_PI;
+float theta;
+float aniFacAng;
 float r;
 float x;
 float y;
@@ -24,6 +25,7 @@ void setup() {
   cp5.addSlider("dots").setPosition(20, 60).setRange(10, 360);
   cp5.addSlider("rn").setPosition(20, 80).setRange(1, 100);
   cp5.addSlider("rn2").setPosition(20, 100).setRange(1, 100);
+  cp5.addSlider("pi").setPosition(20, 120).setRange(0, 200);
 }
 
 void draw() {
@@ -46,7 +48,7 @@ void draw() {
   noFill();
   beginShape();
   for (int i=0; i < dots * d; i = i+1) {
-    theta = map(i, 0, dots, 0, TWO_PI);
+    theta = map(i, 0, dots, 0, pi);
     r = mag * cos(k*theta) + c;
     x = cos(theta) * r;
     y = sin(theta) * r;
