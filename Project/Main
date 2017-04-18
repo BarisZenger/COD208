@@ -30,7 +30,7 @@ void loop() {
     digitalWrite(5, HIGH);
     Serial.println(POSITION);
   }
-  if (VAL1 > YPOSITION + 390 && VAL1 < YPOSITION + 990)
+  if (VAL1 > YPOSITION + 390 && VAL1 < YPOSITION + 890)
   {
     POSITION = 5;
     digitalWrite(4, LOW);
