@@ -1,6 +1,8 @@
 #include <Servo.h>
 Servo myservo;
 
+int test = 0;
+
 int pos = 0;
 
 int photocellPin = 0;
@@ -25,8 +27,14 @@ void setup(void) {
 
 void loop(void) {
 
-  //digitalWrite(motorPinx, HIGH);
-  //digitalWrite(motorPiny, HIGH);
+  if(test == 1){
+  digitalWrite(motorPinx, HIGH);
+  digitalWrite(motorPiny2, HIGH);
+  }
+  if(test == 2){
+  digitalWrite(motorPinx2, HIGH);
+  digitalWrite(motorPiny, HIGH);
+  }
   
   photocellReading = analogRead(photocellPin);
 
