@@ -1,0 +1,105 @@
+#include <Servo.h>
+Servo myservo;
+
+int test = 0;
+
+int pos = 0;
+
+int photocellPin = 0;
+int photocellReading;
+
+boolean isMoving = false;
+boolean isMoving2 = false;
+
+int motorPinx = 4;
+int motorPinx2 = 5;
+int motorPiny = 6;
+int motorPiny2 = 7;
+
+int joyPin = 2;
+int butPin = 3;
+int movement = 0;
+int button = 0;
+
+void setup(void) {
+  Serial.begin(9600);
+  myservo.attach(9);
+  pinMode(motorPinx, OUTPUT);
+  pinMode(motorPinx2, OUTPUT);
+  pinMode(motorPiny, OUTPUT);
+  pinMode(motorPiny2, OUTPUT);
+  pinMode(butPin, INPUT_PULLUP);
+}
+
+int treatValue(int data) {
+  return (data * 9 / 1024);
+}
+
+void loop(void) {
+
+  photocellReading = analogRead(photocellPin);
+  delay(15);
+
+  Serial.print("Analog reading = ");
+  Serial.println(photocellReading);
+
+  movement = analogRead(joyPin);
+  delay(15);
+  button = digitalRead(butPin);
+  delay(15);
+
+  Serial.print("movement: ");
+  Serial.println(treatValue(movement));
+  Serial.print("press : ");
+  Serial.println(button);
+  delay(15);
+
+  if (treatValue(movement) == 4) {
+    digitalWrite(motorPinx2, LOW);
+    delay(15);
+    digitalWrite(motorPiny, LOW);
+    delay(15);
+    digitalWrite(motorPinx, LOW);
+    delay(15);
+    digitalWrite(motorPiny2, LOW);
+    delay(15);
+  }
+  if (treatValue(movement) == 8) {
+    digitalWrite(motorPinx2, LOW);
+    delay(15);
+    digitalWrite(motorPiny, LOW);
+    delay(15);
+    digitalWrite(motorPinx, HIGH);
+    delay(15);
+    digitalWrite(motorPiny2, HIGH);
+    delay(15);
+  }
+  if (treatValue(movement) == 0) {
+    digitalWrite(motorPinx, LOW);
+    delay(15);
+    digitalWrite(motorPiny2, LOW);
+    delay(15);
+    digitalWrite(motorPinx2, HIGH);
+    delay(15);
+    digitalWrite(motorPiny, HIGH);
+    delay(15);
+  }
+
+  if (photocellReading < 900 && isMoving == false) {
+    for (pos = 0; pos < 90; pos += 10) {
+      myservo.write(pos);
+      delay(15);
+    }
+    isMoving = true;
+    isMoving2 = false;
+  }
+  if (photocellReading > 900 && isMoving2 == false) {
+    for (pos = 90; pos >= 0; pos -= 10) {
+      myservo.write(pos);
+      delay(15);
+    }
+    isMoving = false;
+    isMoving2 = true;
+  }
+  delay(100);
+}
