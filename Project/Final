@@ -60,7 +60,7 @@ void loop(void) {
   Serial.println(treatValue(car));
   delay(15);
 
-  if (treatValue(movement) == 4 || treatValue(movement) == 5) {
+  if (treatValue(movement) == 3 || treatValue(movement) == 4 || treatValue(movement) == 5) {
     digitalWrite(motorPinx2, LOW);
     delay(15);
     digitalWrite(motorPiny, LOW);
@@ -70,7 +70,7 @@ void loop(void) {
     digitalWrite(motorPiny2, LOW);
     delay(15);
   }
-  if (treatValue(movement) == 0 || treatValue(movement) == 1) {
+  if (treatValue(movement) == 0 || treatValue(movement) == 1 || treatValue(movement) == 2) {
     digitalWrite(motorPinx2, LOW);
     delay(15);
     digitalWrite(motorPiny, LOW);
@@ -80,7 +80,7 @@ void loop(void) {
     digitalWrite(motorPiny2, HIGH);
     delay(15);
   }
-  if (treatValue(movement) == 8 || treatValue(movement) == 7) {
+  if (treatValue(movement) == 8 || treatValue(movement) == 7 || treatValue(movement) == 6) {
     digitalWrite(motorPinx, LOW);
     delay(15);
     digitalWrite(motorPiny2, LOW);
@@ -91,13 +91,13 @@ void loop(void) {
     delay(15);
   }
 
-  if (treatValue(car) == 8 || treatValue(car) == 7) {
+  if (treatValue(car) == 8 || treatValue(car) == 7 || treatValue(car) == 6) {
     digitalWrite(motorPinx2, HIGH);
     delay(15);
     digitalWrite(motorPiny2, HIGH);
     delay(15);
   }
-  if (treatValue(car) == 0 || treatValue(car) == 1) {
+  if (treatValue(car) == 0 || treatValue(car) == 1 || treatValue(car) == 2) {
     digitalWrite(motorPinx, HIGH);
     delay(15);
     digitalWrite(motorPiny, HIGH);
@@ -113,7 +113,7 @@ void loop(void) {
     isMoving2 = true;
   }
 
-  if (photocellReading < 930 && isMoving == false) {
+  if (photocellReading < 400 && isMoving == false) {
     for (pos = 0; pos < 90; pos += 10) {
       myservo.write(pos);
       delay(15);
@@ -121,7 +121,7 @@ void loop(void) {
     isMoving = true;
     isMoving2 = false;
   }
-  if (photocellReading > 930 && isMoving2 == false) {
+  if (photocellReading > 400 && isMoving2 == false) {
     for (pos = 90; pos >= 0; pos -= 10) {
       myservo.write(pos);
       delay(15);
