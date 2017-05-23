@@ -16,9 +16,11 @@ int motorPinx2 = 5;
 int motorPiny = 6;
 int motorPiny2 = 7;
 
+int joyPinmove = 1;
 int joyPin = 2;
 int butPin = 3;
 int movement = 0;
+int car = 0;
 int button = 0;
 
 void setup(void) {
@@ -45,6 +47,8 @@ void loop(void) {
 
   movement = analogRead(joyPin);
   delay(15);
+  car = analogRead(joyPinmove);
+  delay(15);
   button = digitalRead(butPin);
   delay(15);
 
@@ -52,9 +56,11 @@ void loop(void) {
   Serial.println(treatValue(movement));
   Serial.print("press : ");
   Serial.println(button);
+  Serial.print("car : ");
+  Serial.println(treatValue(car));
   delay(15);
 
-  if (treatValue(movement) == 4) {
+  if (treatValue(movement) == 4 || treatValue(movement) == 5) {
     digitalWrite(motorPinx2, LOW);
     delay(15);
     digitalWrite(motorPiny, LOW);
@@ -64,7 +70,7 @@ void loop(void) {
     digitalWrite(motorPiny2, LOW);
     delay(15);
   }
-  if (treatValue(movement) == 8) {
+  if (treatValue(movement) == 0 || treatValue(movement) == 1) {
     digitalWrite(motorPinx2, LOW);
     delay(15);
     digitalWrite(motorPiny, LOW);
@@ -74,12 +80,25 @@ void loop(void) {
     digitalWrite(motorPiny2, HIGH);
     delay(15);
   }
-  if (treatValue(movement) == 0) {
+  if (treatValue(movement) == 8 || treatValue(movement) == 7) {
     digitalWrite(motorPinx, LOW);
     delay(15);
     digitalWrite(motorPiny2, LOW);
     delay(15);
     digitalWrite(motorPinx2, HIGH);
+    delay(15);
+    digitalWrite(motorPiny, HIGH);
+    delay(15);
+  }
+
+  if (treatValue(car) == 8 || treatValue(car) == 7) {
+    digitalWrite(motorPinx2, HIGH);
+    delay(15);
+    digitalWrite(motorPiny2, HIGH);
+    delay(15);
+  }
+  if (treatValue(car) == 0 || treatValue(car) == 1) {
+    digitalWrite(motorPinx, HIGH);
     delay(15);
     digitalWrite(motorPiny, HIGH);
     delay(15);
@@ -94,7 +113,7 @@ void loop(void) {
     isMoving2 = true;
   }
 
-  if (photocellReading < 920 && isMoving == false) {
+  if (photocellReading < 930 && isMoving == false) {
     for (pos = 0; pos < 90; pos += 10) {
       myservo.write(pos);
       delay(15);
@@ -102,7 +121,7 @@ void loop(void) {
     isMoving = true;
     isMoving2 = false;
   }
-  if (photocellReading > 920 && isMoving2 == false) {
+  if (photocellReading > 930 && isMoving2 == false) {
     for (pos = 90; pos >= 0; pos -= 10) {
       myservo.write(pos);
       delay(15);
