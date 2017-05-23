@@ -85,7 +85,16 @@ void loop(void) {
     delay(15);
   }
 
-  if (photocellReading < 900 && isMoving == false) {
+  if (button == 0) {
+    for (pos = 90; pos >= -750; pos -= 10) {
+      myservo.write(pos);
+      delay(15);
+    }
+    isMoving = false;
+    isMoving2 = true;
+  }
+
+  if (photocellReading < 920 && isMoving == false) {
     for (pos = 0; pos < 90; pos += 10) {
       myservo.write(pos);
       delay(15);
@@ -93,7 +102,7 @@ void loop(void) {
     isMoving = true;
     isMoving2 = false;
   }
-  if (photocellReading > 900 && isMoving2 == false) {
+  if (photocellReading > 920 && isMoving2 == false) {
     for (pos = 90; pos >= 0; pos -= 10) {
       myservo.write(pos);
       delay(15);
